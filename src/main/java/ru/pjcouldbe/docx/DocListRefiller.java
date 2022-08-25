@@ -128,7 +128,7 @@ public class DocListRefiller {
     
     private boolean isSatisfiedByFilters(ClassData classData, List<Filter> rowFilters, int row) {
         for (Filter f : rowFilters) {
-            String value = getActualFilterValue(f.getKey(), classData, row);
+            String value = getActualFilterValue(f.key(), classData, row);
             
             if (f.shouldBeFiltered(value)) {
                 return false;
