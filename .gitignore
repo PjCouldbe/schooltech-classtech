@@ -177,10 +177,10 @@ Icon
 .Trashes
 .VolumeIcon.icns
 .com.apple.timemachine.donotpresent
-/src/main/resources/available_pg.properties
+/classtech/src/main/resources/available_pg.properties
 /available_pg.properties
 /db/h2_perm.mv.db
 /db/h2_perm.trace.db
-/src/main/resources/application.development_pg_mine.properties
-/src/main/resources/application-development_pg_mine.properties
+/classtech/src/main/resources/application.development_pg_mine.properties
+/classtech/src/main/resources/application-development_pg_mine.properties
 /wfmserver/src/main/resources/application.development_pg_mine.properties
