@@ -100,7 +100,22 @@ public class TextUtils {
     }
     
     public void replaceRunsRangeWithText(Range<Integer> runsRange, XWPFParagraph p, String text) {
-        replaceRunsRangeWithTextMultiline(runsRange,p, new String[] {text});
+        List<XWPFRun> pruns = p.getRuns();
+        for (int r = runsRange.getMaximum(); r > runsRange.getMinimum(); r--) {
+            p.removeRun(r);
+        }
+    
+        XWPFRun runToEdit;
+        if (runsRange.getMinimum() < pruns.size()) {
+            runToEdit = pruns.get(runsRange.getMinimum());
+        } else {
+            runToEdit = p.createRun();
+        
+            RunFormats rf = new RunFormats(pruns.get(pruns.size() - 1));
+            rf.apply(runToEdit);
+        }
+    
+        runToEdit.setText(text, 0);
     }
     
     public void replaceRunsRangeWithTextMultiline(Range<Integer> runsRange, XWPFParagraph p, String[] lines) {
@@ -121,9 +136,11 @@ public class TextUtils {
     
         if (lines.length > 0) {
             for (int r = 0; r < lines.length; r++) {
-                runToEdit.setText(lines[r]);
-                if (r != lines.length - 1) {
+                if (r == 0) {
+                    runToEdit.setText(lines[r], 0);
+                } else {
                     runToEdit.addBreak();
+                    runToEdit.setText(lines[r]);
                 }
             }
         }
