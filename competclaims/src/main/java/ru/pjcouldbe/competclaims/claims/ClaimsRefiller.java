@@ -2,6 +2,7 @@ package ru.pjcouldbe.competclaims.claims;
 
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import ru.pjcouldbe.classtech.data.ClassData;
+import ru.pjcouldbe.classtech.xls.ClassXLSReader;
 import ru.pjcouldbe.classtech.xls.XLSReader;
 import ru.pjcouldbe.competclaims.args.StudentList;
 import ru.pjcouldbe.competclaims.args.StudentListArgsParser;
@@ -18,7 +19,7 @@ public class ClaimsRefiller {
     private final StudentListArgsParser studentListParser = new StudentListArgsParser();
     
     public void copyAllClaimsOn(String[] args) throws IOException {
-        final XLSReader xlsReader = new XLSReader();
+        final XLSReader xlsReader = new ClassXLSReader();
         final ClassData classData = xlsReader.readClassData(Paths.get(args[0]));
     
         try (XWPFDocument templateDoc = openTemplateClaim(args[1])) {

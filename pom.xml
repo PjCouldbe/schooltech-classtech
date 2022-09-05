@@ -12,6 +12,7 @@
     <modules>
         <module>classtech</module>
         <module>competclaims</module>
+        <module>compettech</module>
     </modules>
 
     <properties>
@@ -95,17 +96,6 @@
                                 <version>${lombok.ver}</version>
                             </path>
                         </annotationProcessorPaths>
-                        <compilerArgs>
-                            <compilerArg>
-                                -Amapstruct.suppressGeneratorTimestamp=true
-                            </compilerArg>
-                            <compilerArg>
-                                -Amapstruct.suppressGeneratorVersionInfoComment=true
-                            </compilerArg>
-                            <compilerArg>
-                                -Amapstruct.defaultComponentModel=spring
-                            </compilerArg>
-                        </compilerArgs>
                     </configuration>
                 </plugin>
             </plugins>
