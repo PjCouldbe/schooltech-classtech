@@ -36,12 +36,20 @@ public class ClassData {
             .filter(not(String::isEmpty))
             .map(k -> manualData.getOrDefault(k, new ArrayList<>()))
             .map(dataList -> dataList.size() <= row ? "" : dataList.get(row))
-            .map(String::trim)
-            .filter(not(String::isEmpty))
+            .map(str -> optTrim(str, key))
+            .filter(not(String::isBlank))
             .or(() -> Optional.ofNullable(constData.get(key)))
             .filter(not(String::isEmpty))
             .or(() -> Optional.ofNullable(constComputeData.apply(key)))
             .filter(not(String::isEmpty));
+    }
+    
+    private String optTrim(String content, String key) {
+        if (key.contains("VNEK_")) {
+            return content;
+        } else {
+            return content.trim();
+        }
     }
     
     public int totalStudents() {

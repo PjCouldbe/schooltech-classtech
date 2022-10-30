@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -48,6 +49,11 @@ public abstract class XLSReader {
                     cell -> result.get(titleIndex.get(cell.getColumnIndex())).add(cell.getStringCellValue())
                 )
             );
+        }
+    
+        int expectedRows = result.values().stream().map(List::size).max(Comparator.naturalOrder()).orElse(0);
+        if (result.values().stream().anyMatch(v -> v.size() != expectedRows)) {
+            throw new IllegalStateException("Some rows contains null cells");
         }
         
         return new ClassData(result);

@@ -44,7 +44,7 @@ public class TextUtils {
         String content = column;
         for (Map.Entry<String, String> entry : contentByKeys.entrySet()) {
             String key = entry.getKey();
-            String value = entry.getValue().trim();
+            String value = entry.getValue();
             
             content = content.replace(key, value);
         }
@@ -53,7 +53,7 @@ public class TextUtils {
             content = content.replace("\"" + i + "\"", delimiters.get(i));
         }
         
-        return content.trim();
+        return content;
     }
     
     public Range<Integer> getRunsRangeWithinBookmark(CTBookmark b) {

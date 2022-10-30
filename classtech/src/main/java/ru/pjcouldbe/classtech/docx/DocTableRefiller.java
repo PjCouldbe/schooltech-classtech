@@ -12,11 +12,11 @@ import org.apache.xmlbeans.XmlException;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTBookmark;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTRow;
 import ru.pjcouldbe.classtech.data.ClassData;
-import ru.pjcouldbe.classtech.utils.TextUtils;
 import ru.pjcouldbe.classtech.docx.filter.Filter;
 import ru.pjcouldbe.classtech.docx.filter.FilterParser;
 import ru.pjcouldbe.classtech.docx.stat.DocStatParser;
 import ru.pjcouldbe.classtech.utils.BookmarkUtils;
+import ru.pjcouldbe.classtech.utils.TextUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -274,11 +274,13 @@ public class DocTableRefiller {
             cellsFontSize[cellIndex].apply(p);
         }
     
-        String[] values = textUtils.columnToCellMultiline(column, classData, row, DELIMITERS).split("\n");
+        String[] values = textUtils.columnToCellMultiline(column, classData, row, DELIMITERS)
+            .lines()
+            .toArray(String[]::new);
         if (values.length > 0) {
             for (int r = 0; r < values.length; r++) {
                 run.setText(values[r]);
-                if (r != values.length - 1) {
+                if (r != values.length - 1 || values[r].isBlank()) {
                     run.addBreak();
                 }
             }
